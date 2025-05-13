@@ -76,7 +76,7 @@
       formData.append('product', document.getElementById('productImage').files[0]);
       formData.append('message', document.getElementById('message').value);
 
-      const res = await fetch('/send-blast', {
+      const res = await fetch('https://baitemailblast.onrender.com/send-blast', {
         method: 'POST',
         body: formData
       });
