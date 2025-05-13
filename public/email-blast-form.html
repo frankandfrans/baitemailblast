@@ -75,11 +75,19 @@
       formData.append('logo', document.getElementById('logoImage').files[0]);
       formData.append('product', document.getElementById('productImage').files[0]);
       formData.append('message', document.getElementById('message').value);
+try {
+  const res = await fetch('https://baitemailblast.onrender.com/send-blast', {
+    method: 'POST',
+    body: formData
+  });
 
-      const res = await fetch('https://baitemailblast.onrender.com/send-blast', {
-        method: 'POST',
-        body: formData
-      });
+  const text = await res.text();
+  document.getElementById('status').innerText = text;
+} catch (err) {
+  console.error('Fetch error:', err);
+  document.getElementById('status').innerText = 'An error occurred while sending the email.';
+}
+
 
       const text = await res.text();
       document.getElementById('status').innerText = text;
