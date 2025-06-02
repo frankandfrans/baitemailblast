@@ -41,12 +41,14 @@ app.post('/send-blast', upload.fields([
 
     // Setup Gmail transporter
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: process.env.GMAIL_USER,
-        pass: process.env.GMAIL_PASS
-      }
-    });
+  host: 'mail.hatteras-island.com',
+  port: 465,
+  secure: true,
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS
+  }
+});
 
     const html = `
       <div style="text-align:center;">
