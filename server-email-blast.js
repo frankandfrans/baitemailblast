@@ -61,8 +61,7 @@ app.post('/send-blast', upload.fields([
     `;
 
     const mailOptions = {
-      from: `"Frank & Fran's" <${process.env.GMAIL_USER}>`,
-      to: process.env.GMAIL_USER,
+      from: process.env.MAIL_FROM, // Must resolve to a valid email address
       bcc: emails,
       subject: 'Fresh Bait Alert!',
       html,
