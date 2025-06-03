@@ -62,7 +62,7 @@ app.post('/send-blast', upload.fields([
 
     const mailOptions = {
       from: process.env.MAIL_FROM, // Must resolve to a valid email address
-      bcc: recipients.join(','),
+      bcc: emails,
       subject: 'Frank & Fran Fresh Bait Alert!',
       html,
       attachments: [
