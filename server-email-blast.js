@@ -70,7 +70,7 @@ app.post('/send-blast', upload.fields([
         { filename: 'product.jpg', path: productPath, cid: 'product' }
       ]
     };
-
+console.log(mailOptions)
     await transporter.sendMail(mailOptions);
     res.send(`✅ Email sent to ${emails.length} recipients`);
 
