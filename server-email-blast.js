@@ -25,10 +25,13 @@ app.post('/send-blast', upload.fields([
     await new Promise((resolve, reject) => {
       fs.createReadStream(csvFilePath)
         .pipe(csv())
-        .on('data', row => {
-          const email = Object.values(row)[0];
-          if (email && email.includes('@')) emails.push(email.trim());
-        })
+       .on('data', row => {
+  const email = row['Email']?.trim();
+  const consent = row['Receive Marketing Emails']?.trim();
+  if (consent === '1' && email.includes('@')) {
+    emails.push(email);
+  }
+})
         .on('end', resolve)
         .on('error', reject);
     });
