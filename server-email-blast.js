@@ -46,9 +46,10 @@ app.post('/send-blast', upload.fields([
    const nodemailer = require('nodemailer');
 
  const transporter = nodemailer.createTransport({
-  host: 'mail.hatteras-island.com',
-  port: 465,
-  secure: true,
+  host: process.env.SMTP_HOST,
+  port: parseInt(process.env.SMTP_PORT), // 587
+  secure: false, // MUST be false for STARTTLS
+  requireTLS: true, // Force STARTTLS
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS
