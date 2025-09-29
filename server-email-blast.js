@@ -43,8 +43,8 @@ app.post('/send-blast', upload.fields([
     const productPath = req.files['product'][0].path;
 
   
-    const transporter = nodemailer.createTransport({ host: 'mail.hatteras-island.com', port: 465, secure: true, auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS
-};
+    const transporter = nodemailer.createTransport({ host: 'mail.hatteras-island.com', port: 465, secure: true, auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS}});
+
 
 
     const html = `
