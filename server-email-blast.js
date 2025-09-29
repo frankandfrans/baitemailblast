@@ -43,17 +43,7 @@ app.post('/send-blast', upload.fields([
     const productPath = req.files['product'][0].path;
 
   
-      const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,            // e.g., gator4103.hostgator.com
-  port: Number(process.env.SMTP_PORT) || 465,
-  secure: Number(process.env.SMTP_PORT) === 465,   // true for 465, false for 587
-  requireTLS: Number(process.env.SMTP_PORT) === 587, // STARTTLS on 587
-  auth: {
-    user: process.env.EMAIL_USER,         // full email address
-    pass: process.env.EMAIL_PASS
-  },
-  family: 4,                              // prefer IPv4 to avoid IPv6 hang
-  tls: { minVersion: 'TLSv1.2' }
+    const transporter = nodemailer.createTransport({ host: 'mail.hatteras-island.com', port: 465, secure: true, auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS
 });
 
 
