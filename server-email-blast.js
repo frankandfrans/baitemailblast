@@ -55,7 +55,13 @@ app.post('/send-blast', upload.fields([
   }
 });
 
-
+transporter.verify((error, success) => {
+  if (error) {
+    console.error('SMTP Verification Error:', error);
+  } else {
+    console.log('SMTP Server Ready to Take Messages');
+  }
+});
 
     const html = `
       <div style="text-align:center;">
