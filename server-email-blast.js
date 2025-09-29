@@ -43,8 +43,21 @@ app.post('/send-blast', upload.fields([
     const productPath = req.files['product'][0].path;
 
   
-    const transporter = nodemailer.createTransport({ host: 'mail.hatteras-island.com', port: 465, secure: true, auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS}});
+   const nodemailer = require('nodemailer');
 
+const transporter = nodemailer.createTransport({
+  host: process.env.SMTP_HOST,     // e.g., mail.hatteras-island.com
+  port: parseInt(process.env.SMTP_PORT),  // should be 587 now
+  secure: false,                   // false = use STARTTLS, not SMTPS
+  auth: {
+    user: process.env.EMAIL_USER, // e.g., info@hatteras-island.com
+    pass: process.env.EMAIL_PASS
+  },
+  requireTLS: true,                // enforce TLS handshake after connecting
+  tls: {
+    rejectUnauthorized: false      // <-- add this ONLY if your mail server uses a self-signed cert
+  }
+});
 
 
     const html = `
