@@ -46,14 +46,18 @@ app.post('/send-blast', upload.fields([
    const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,         // 'mail.hatteras-island.com'
-  port: 465,
-  secure: true,                         // <- IMPORTANT for port 465
+  host: process.env.SMTP_HOST,
+  port: 587,
+  secure: false, // IMPORTANT: secure must be false for port 587
   auth: {
-    user: process.env.EMAIL_USER,      // 'info@hatteras-island.com'
+    user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
+  tls: {
+    rejectUnauthorized: false, // TEMPORARY: disables cert checking
+  },
 });
+
 transporter.verify((error, success) => {
   if (error) {
     console.error('SMTP Verification Error:', error);
