@@ -53,6 +53,8 @@ app.post('/send-blast', upload.fields([
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS
   }
+   logger: true,   // <- Enable detailed logging
+  debug: true     // <- Enable SMTP connection debug output
 });
 
 
