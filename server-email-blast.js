@@ -43,7 +43,17 @@ app.post('/send-blast', upload.fields([
     const productPath = req.files['product'][0].path;
 
 const nodemailer = require('nodemailer');
+import net from 'net';
 
+const socket = net.connect(465, 'mail.hatteras-island.com');
+socket.on('connect', () => {
+  console.log('✅ SMTP Port 465 reachable!');
+  socket.end();
+});
+socket.on('error', (err) => {
+  console.error('❌ Cannot reach SMTP port:', err);
+});
+  
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
   port: parseInt(process.env.SMTP_PORT),
