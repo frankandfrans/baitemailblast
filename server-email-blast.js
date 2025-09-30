@@ -45,16 +45,18 @@ app.post('/send-blast', upload.fields([
   
    const nodemailer = require('nodemailer');
 
- const transporter = nodemailer.createTransport({
-  host: 'mail.hatteras-island.com',
-  port: 465,
-  secure: true,
+onst nodemailer = require('nodemailer');
+
+const transporter = nodemailer.createTransport({
+  host: process.env.SMTP_HOST,
+  port: parseInt(process.env.SMTP_PORT),
+  secure: process.env.SMTP_PORT === '465', // true for 465, false for other ports
   auth: {
     user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
-  }
-   logger: true,   // <- Enable detailed logging
-  debug: true     // <- Enable SMTP connection debug output
+    pass: process.env.EMAIL_PASS,
+  },
+  logger: true,     // Enable detailed logs
+  debug: true       // Enable SMTP traffic logs
 });
 
 
