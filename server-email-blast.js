@@ -42,9 +42,6 @@ app.post('/send-blast', upload.fields([
     const logoPath = req.files['logo'][0].path;
     const productPath = req.files['product'][0].path;
 
-  
-   const nodemailer = require('nodemailer');
-
 const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
