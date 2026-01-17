@@ -75,6 +75,25 @@ transporter.verify((error, success) => {
   }
 });
 
+    
+    const useCurrentSubject = req.body.useCurrentSubject === 'on';
+    const customSubject = req.body.customSubject;
+    let emailSubject = 'Frank & Fran Fresh Bait Alert!';
+
+    if (!useCurrentSubject && customSubject) {
+      emailSubject = customSubject;
+    } else {
+      const htmlFile = req.files['html']?.[0];
+      if (htmlFile) {
+        const htmlContent = fs.readFileSync(htmlFile.path, 'utf8');
+        const titleMatch = htmlContent.match(/<title>(.*?)<\/title>/i);
+        if (titleMatch && titleMatch[1]) {
+          emailSubject = titleMatch[1];
+        }
+      }
+    }
+
+
     const html = `
       <div style="text-align:center;">
         <img src="cid:logo" style="max-width: 200px;"><br>
@@ -88,7 +107,7 @@ transporter.verify((error, success) => {
     const mailOptions = {
       from: process.env.MAIL_FROM, // Must resolve to a valid email address
       bcc: emails,
-      subject: "Frank & Fran Fresh Bait Alert!",
+      subject: emailSubject,
       html,
       attachments: [
         { filename: 'logo.jpg', path: logoPath, cid: 'logo' },
