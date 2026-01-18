@@ -82,7 +82,8 @@ app.post('/send-blast', upload.fields([
     };
 
     await transporter.sendMail(mailOptions);
-    res.send(\`✅ Email sent to \${emails.length} recipients\`);
+   res.send(`✅ Email sent to ${emails.length} recipients`);
+
 
     fs.unlinkSync(csvFilePath);
     fs.unlinkSync(logoPath);
