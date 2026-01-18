@@ -1,4 +1,3 @@
-
 require('dotenv').config();
 const express = require('express');
 const multer = require('multer');
@@ -21,7 +20,6 @@ app.post('/send-blast', upload.fields([
     const emails = [];
     const csvFilePath = req.files['csv'][0].path;
 
-    // Parse emails with "Receive marketing emails" = 1
     await new Promise((resolve, reject) => {
       fs.createReadStream(csvFilePath)
         .pipe(csv())
@@ -42,9 +40,11 @@ app.post('/send-blast', upload.fields([
     const logoPath = req.files['logo'][0].path;
     const productPath = req.files['product'][0].path;
 
-    const subject = req.body.useCurrentSubject
+    const useDefaultSubject = req.body.useCurrentSubject === 'on';
+    const customSubject = req.body.customSubject?.trim();
+    const subject = useDefaultSubject
       ? "Frank & Fran Fresh Bait Alert!"
-      : (req.body.customSubject || "Frank & Fran Fresh Bait Alert!");
+      : (customSubject || "Frank & Fran Fresh Bait Alert!");
 
     const transporter = nodemailer.createTransport({
       host: 'mail.hatteras-island.com',
@@ -56,27 +56,23 @@ app.post('/send-blast', upload.fields([
       }
     });
 
-const subjectLine = useDefaultSubject
-  ? 'Frank & Fran Fresh Bait Alert!'
-  : customSubject || 'Frank & Fran Fresh Bait Alert!';
-
-const html = `
-  <div style="text-align:center;">
-    <img src="cid:logo" style="max-width: 200px;"><br>
-    <h2 style="color:#0078a0;">Fresh Bait Alert!</h2>
-    <p>${messageText}</p>
-    <img src="cid:product" style="max-width:100%; margin-top: 10px;"><br>
-    <p style="font-size:12px;color:#777;">
-      You're receiving this because you opted in at Frank & Fran's.<br>
-      Need to unsubscribe? <a href="https://hatteras-island.com/fresh-bait-alert-sign-up/">Click here</a>
-    </p>
-  </div>
-`;
+    const html = `
+      <div style="text-align:center;">
+        <img src="cid:logo" style="max-width: 200px;"><br>
+        <h2 style="color:#0078a0;">Fresh Bait Alert!</h2>
+        <p>${messageText}</p>
+        <img src="cid:product" style="max-width:100%; margin-top: 10px;"><br>
+        <p style="font-size:12px;color:#777;">
+          You're receiving this because you opted in at Frank & Fran's.<br>
+          Need to unsubscribe? <a href="https://hatteras-island.com/fresh-bait-alert-sign-up/">Click here</a>
+        </p>
+      </div>
+    `;
 
     const mailOptions = {
       from: process.env.MAIL_FROM,
       bcc: emails,
-      subject: subjectLine,
+      subject,
       html,
       attachments: [
         { filename: 'logo.jpg', path: logoPath, cid: 'logo' },
@@ -85,8 +81,7 @@ const html = `
     };
 
     await transporter.sendMail(mailOptions);
-   res.send(`✅ Email sent to ${emails.length} recipients`);
-
+    res.send(`✅ Email sent to ${emails.length} recipients`);
 
     fs.unlinkSync(csvFilePath);
     fs.unlinkSync(logoPath);
