@@ -1,0 +1,87 @@
+
+body {
+  font-family: Georgia, serif;
+  background-color: #f4f9fc;
+  margin: 0;
+  padding: 0;
+  color: #003049;
+}
+
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 30px 20px;
+  text-align: center;
+}
+
+.logo {
+  width: 100%;
+  max-width: 350px;
+  height: auto;
+  margin: 20px auto;
+}
+
+h1 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: #004e7c;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="file"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #0078a0;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #005f7f;
+}
+
+.preview {
+  max-width: 100%;
+  max-height: 200px;
+  margin-top: 10px;
+  display: block;
+}
+
+.feedback {
+  margin-top: 15px;
+  font-weight: bold;
+  color: green;
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 20px 10px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+}
