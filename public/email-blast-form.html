@@ -1,30 +1,72 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Bait Email Blast</title>
+  <meta charset="UTF-8" />
+  <title>Frank & Fran's Bait Email Blast</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 30px;
+      background: #f0f8ff;
+    }
+    form {
+      display: inline-block;
+      text-align: left;
+      padding: 20px 40px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      background: #ffffff;
+    }
+    label {
+      font-weight: bold;
+    }
+    label, input, textarea, button {
+      display: block;
+      width: 100%;
+      margin-bottom: 15px;
+    }
+    input[type="file"], input[type="text"], textarea {
+      padding: 8px;
+      font-size: 14px;
+    }
+    button {
+      padding: 10px;
+      background-color: #0078a0;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #005f7f;
+    }
+    img.logo {
+      max-width: 300px;
+      margin-bottom: 20px;
+    }
+  </style>
 </head>
 <body>
+  <img src="SIGN LOGO FOR BAIT EMAILS.png" alt="Frank & Fran's Logo" class="logo" />
+  <h2>Send Fresh Bait Alert</h2>
   <form action="/send-blast" method="POST" enctype="multipart/form-data">
-    <label for="csv">CSV File:</label>
-    <input type="file" name="csv" required><br>
+    <label><input type="checkbox" name="useCurrentSubject" id="useCurrentSubject" checked> Use default subject</label>
+    <label for="customSubject">Custom Subject (optional)</label>
+    <input type="text" name="customSubject" id="customSubject" placeholder="Enter custom subject">
 
-    <label for="logo">Logo Image:</label>
-    <input type="file" name="logo" required><br>
+    <label for="csv">Upload CSV</label>
+    <input type="file" name="csv" accept=".csv" required />
 
-    <label for="product">Product Image:</label>
-    <input type="file" name="product" required><br>
+    <label for="logo">Upload Logo</label>
+    <input type="file" name="logo" accept="image/*" required />
 
-    <label for="message">Message:</label><br>
-    <textarea name="message" rows="6" cols="60"></textarea><br><br>
+    <label for="product">Upload Product Image</label>
+    <input type="file" name="product" accept="image/*" required />
 
-    <label>
-      <input type="checkbox" name="useCurrentSubject" checked>
-      Use default subject: "Frank & Fran Fresh Bait Alert!"
-    </label><br><br>
-
-    <label for="customSubject">Or use custom subject:</label><br>
-    <input type="text" name="customSubject" size="60" placeholder="Enter custom subject line here"><br><br>
+    <label for="message">Message</label>
+    <textarea name="message" rows="5" required></textarea>
 
     <button type="submit">Send Email Blast</button>
   </form>
