@@ -13,6 +13,8 @@ const PORT = process.env.PORT || 3000;
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 app.post('/send-blast', upload.fields([
   { name: 'csv' }, { name: 'logo' }, { name: 'product' }
 ]), async (req, res) => {
