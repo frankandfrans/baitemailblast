@@ -56,7 +56,7 @@ app.post('/send-blast', upload.fields([
       }
     });
 
- const subjectLine = useDefaultSubject
+const subjectLine = useDefaultSubject
   ? 'Frank & Fran Fresh Bait Alert!'
   : customSubject || 'Frank & Fran Fresh Bait Alert!';
 
@@ -72,10 +72,11 @@ const html = `
     </p>
   </div>
 `;
+
     const mailOptions = {
       from: process.env.MAIL_FROM,
       bcc: emails,
-      subject,
+      subject: subjectLine,
       html,
       attachments: [
         { filename: 'logo.jpg', path: logoPath, cid: 'logo' },
