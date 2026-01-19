@@ -54,9 +54,8 @@ app.post('/send-blast', upload.fields([
     const html = `
       <div style="text-align:center;">
         <img src="cid:logo" style="max-width: 200px;"><br>
-        <h2 style="color:#0078a0;">Fresh Bait Alert!</h2>
-        <p>${messageText}</p>
-        ${productImageTag}
+        <h2 style="color:#0078a0;">${messageText}</h2>
+            ${productImageTag}
         <p style="font-size:12px;color:#777;">
           You're receiving this because you opted in at Frank & Fran's.<br>
           Need to unsubscribe? <a href="https://hatteras-island.com/fresh-bait-alert-sign-up/">Click here</a>
