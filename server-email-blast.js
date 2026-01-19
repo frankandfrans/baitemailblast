@@ -53,8 +53,6 @@ const productImageHtml = productLink
     const logoPath = req.files['logo'][0].path;
     const productPath = req.files['product'][0].path;
     const useDefaultSubject = req.body.useCurrentSubject !== undefined;
-    const productLink = req.body.productLink || null;
-
     const subject = useDefaultSubject
       ? "Frank & Fran Fresh Bait Alert!"
       : (req.body.customSubject || "Frank & Fran Fresh Bait Alert!");
