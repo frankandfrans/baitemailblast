@@ -1,3 +1,4 @@
+// server-email-blast.js
 require('dotenv').config();
 const express = require('express');
 const multer = require('multer');
@@ -12,7 +13,6 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.post('/send-blast', upload.fields([
   { name: 'csv' }, { name: 'logo' }, { name: 'product' }
@@ -38,21 +38,25 @@ app.post('/send-blast', upload.fields([
     if (emails.length === 0) return res.send('No valid emails found in CSV.');
 
     const messageText = req.body.message || '';
-    const productLink = req.body.productLink?.trim();
     const logoPath = req.files['logo'][0].path;
-    const productFile = req.files['product'][0];
-    const productImageUrl = `${req.protocol}://${req.get('host')}/uploads/${productFile.filename}`;
+    const productPath = req.files['product'][0].path;
+    const useDefaultSubject = req.body.useCurrentSubject !== undefined;
+    const productLink = req.body.productLink || null;
 
-    const productImageHtml = productLink
-      ? `<a href="${productLink}" target="_blank"><img src="${productImageUrl}" style="max-width:100%; margin-top:10px;"></a>`
-      : `<img src="${productImageUrl}" style="max-width:100%; margin-top:10px;">`;
+    const subject = useDefaultSubject
+      ? "Frank & Fran Fresh Bait Alert!"
+      : (req.body.customSubject || "Frank & Fran Fresh Bait Alert!");
+
+    const productImageTag = productLink
+      ? `<a href="${productLink}" target="_blank"><img src="cid:product" style="max-width:100%; margin-top: 10px;"></a>`
+      : `<img src="cid:product" style="max-width:100%; margin-top: 10px;">`;
 
     const html = `
       <div style="text-align:center;">
         <img src="cid:logo" style="max-width: 200px;"><br>
         <h2 style="color:#0078a0;">Fresh Bait Alert!</h2>
         <p>${messageText}</p>
-        ${productImageHtml}
+        ${productImageTag}
         <p style="font-size:12px;color:#777;">
           You're receiving this because you opted in at Frank & Fran's.<br>
           Need to unsubscribe? <a href="https://hatteras-island.com/fresh-bait-alert-sign-up/">Click here</a>
@@ -73,12 +77,11 @@ app.post('/send-blast', upload.fields([
     const mailOptions = {
       from: process.env.MAIL_FROM,
       bcc: emails,
-      subject: req.body.useCurrentSubject
-        ? "Frank & Fran Fresh Bait Alert!"
-        : (req.body.customSubject || "Frank & Fran Fresh Bait Alert!"),
+      subject,
       html,
       attachments: [
-        { filename: 'logo.jpg', path: logoPath, cid: 'logo' }
+        { filename: 'logo.jpg', path: logoPath, cid: 'logo' },
+        { filename: 'product.jpg', path: productPath, cid: 'product' }
       ]
     };
 
@@ -87,6 +90,7 @@ app.post('/send-blast', upload.fields([
 
     fs.unlinkSync(csvFilePath);
     fs.unlinkSync(logoPath);
+    fs.unlinkSync(productPath);
   } catch (err) {
     console.error(err);
     res.status(500).send('❌ Failed to send email');
