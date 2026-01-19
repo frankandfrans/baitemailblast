@@ -39,6 +39,17 @@ app.post('/send-blast', upload.fields([
     if (emails.length === 0) return res.send('No valid emails found in CSV.');
 
     const messageText = req.body.message || '';
+
+const productFile = req.files['product'][0];
+const productImageUrl = `${req.protocol}://${req.get('host')}/uploads/${productFile.filename}`;
+const productLink = (req.body.productLink || '').trim();
+
+const productImageHtml = productLink
+  ? `<a href="${productLink}" target="_blank">
+       <img src="${productImageUrl}" style="max-width:100%; margin-top:10px;">
+     </a>`
+  : `<img src="${productImageUrl}" style="max-width:100%; margin-top:10px;">`;
+
     const logoPath = req.files['logo'][0].path;
     const productPath = req.files['product'][0].path;
     const useDefaultSubject = req.body.useCurrentSubject !== undefined;
