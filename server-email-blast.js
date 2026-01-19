@@ -77,19 +77,28 @@ app.post('/send-blast', upload.fields([
   </p>
 
   <!-- SOCIAL ICONS BELOW NAV LINKS -->
-  <div style="margin-top:20px;">
-    <a href="https://www.facebook.com/frankandfransavon" target="_blank" style="margin:0 10px;display:inline-block;">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="#1877F2" xmlns="http://www.w3.org/2000/svg">
-        <path d="M22.675 0h-21.35C.597 0 0 .597 0 1.326v21.348C0 23.403.597 24 1.326 24h11.495v-9.294H9.691V11.01h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.3.2 2.3.2v2.5h-1.3c-1.3 0-1.7.8-1.7 1.6V12h2.9l-.5 2.9h-2.4v7A10 10 0 0 0 22 12z"/>
-      </svg>
-    </a>
+ <div style="margin-top:20px;text-align:center;">
+  <a href="https://www.facebook.com/frankandfransavon" target="_blank" style="margin:0 8px;display:inline-block;">
+    <img
+      src="https://baitemailblast.onrender.com/uploads/facebook.png"
+      width="28"
+      height="28"
+      alt="Facebook"
+      style="display:block;border:0;"
+    />
+  </a>
 
-    <a href="https://www.instagram.com/frankandfrans/" target="_blank" style="margin:0 10px;display:inline-block;">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="#E1306C" xmlns="http://www.w3.org/2000/svg">
-        <path d="M7.75 2h8.5C19.55 2 22 4.45 22 7.75v8.5C22 19.55 19.55 22 16.25 22h-8.5C4.45 22 2 19.55 2 16.25v-8.5C2 4.45 4.45 2 7.75 2zm0 1.5C5.27 3.5 3.5 5.27 3.5 7.75v8.5c0 2.48 1.77 4.25 4.25 4.25h8.5c2.48 0 4.25-1.77 4.25-4.25v-8.5c0-2.48-1.77-4.25-4.25-4.25h-8.5zM12 7a5 5 0 110 10 5 5 0 0 1 0-10zm0 1.5a3.5 3.5 0 100 7 3.5 3.5 0 0 0 0-7zm4.75-.88a1.13 1.13 0 110 2.26 1.13 1.13 0 0 0 0-2.26z"/>
-      </svg>
-    </a>
-  </div>
+  <a href="https://www.instagram.com/frankandfrans/" target="_blank" style="margin:0 8px;display:inline-block;">
+    <img
+      src="https://baitemailblast.onrender.com/uploads/instagram.png"
+      width="28"
+      height="28"
+      alt="Instagram"
+      style="display:block;border:0;"
+    />
+  </a>
+</div>
+
 
   <p style="font-size:12px;color:#777;margin-top:20px;">
     You're receiving this because you opted in at Frank & Fran's.<br>
