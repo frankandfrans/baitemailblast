@@ -51,6 +51,9 @@ app.post('/send-blast', upload.fields([
 
     const html = `
       <div style="text-align:center;max-width:600px;margin:0 auto;">
+   
+
+        <img src="cid:logo" style="max-width:200px;" />
         <p>
           <a href="https://hatteras-island.com/apparel/">APPAREL</a> |
           <a href="https://hatteras-island.com/rods/">RODS</a> |
@@ -58,10 +61,8 @@ app.post('/send-blast', upload.fields([
           <a href="https://hatteras-island.com/tools/">TOOLS</a> |
           <a href="https://hatteras-island.com/gear/">GEAR</a>
         </p>
-
-        <img src="cid:logo" style="max-width:200px;" />
-        <h2 style="color:#0078a0;">Fresh Bait Alert!</h2>
-        <p>${messageText}</p>
+        <h2 style="color:#0078a0;">${messageText}</h2>
+   
         ${productImageHtml}
 
         <p style="margin-top:20px;">
