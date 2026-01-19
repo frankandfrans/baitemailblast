@@ -13,6 +13,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.post('/send-blast', upload.fields([
   { name: 'csv' }, { name: 'logo' }, { name: 'product' }
@@ -52,16 +53,45 @@ app.post('/send-blast', upload.fields([
       : `<img src="cid:product" style="max-width:100%; margin-top: 10px;">`;
 
     const html = `
-      <div style="text-align:center;">
-        <img src="cid:logo" style="max-width: 200px;"><br>
-        <h2 style="color:#0078a0;">${messageText}</h2>
-            ${productImageTag}
-        <p style="font-size:12px;color:#777;">
-          You're receiving this because you opted in at Frank & Fran's.<br>
-          Need to unsubscribe? <a href="https://hatteras-island.com/fresh-bait-alert-sign-up/">Click here</a>
-        </p>
-      </div>
-    `;
+<div style="text-align:center;font-family:Arial,Helvetica,sans-serif;">
+  <div style="margin:15px 0;">
+    <a href="https://hatteras-island.com/apparel/">APPAREL</a> |
+    <a href="https://hatteras-island.com/rods/">RODS</a> |
+    <a href="https://hatteras-island.com/reels/">REELS</a> |
+    <a href="https://hatteras-island.com/tools/">TOOLS</a> |
+    <a href="https://hatteras-island.com/gear/">GEAR</a>
+  </div>
+
+  <img src="cid:logo" style="max-width:200px;"><br>
+
+  <h2 style="color:#0078a0;">Fresh Bait Alert!</h2>
+  <p>${messageText}</p>
+
+  ${productImageHtml}
+
+  <div style="margin:15px 0;">
+    <a href="https://www.facebook.com/frankandfransavon">
+      <img src="cid:facebook" width="32" style="margin:0 8px;">
+    </a>
+    <a href="https://www.instagram.com/frankandfrans/">
+      <img src="cid:instagram" width="32" style="margin:0 8px;">
+    </a>
+  </div>
+
+  <div style="margin:15px 0;">
+    <a href="https://hatteras-island.com/apparel/">APPAREL</a> |
+    <a href="https://hatteras-island.com/rods/">RODS</a> |
+    <a href="https://hatteras-island.com/reels/">REELS</a> |
+    <a href="https://hatteras-island.com/tools/">TOOLS</a> |
+    <a href="https://hatteras-island.com/gear/">GEAR</a>
+  </div>
+
+  <p style="font-size:12px;color:#777;">
+    You're receiving this because you opted in at Frank & Fran's.<br>
+    <a href="https://hatteras-island.com/fresh-bait-alert-sign-up/">Unsubscribe</a>
+  </p>
+</div>
+`;
 
     const transporter = nodemailer.createTransport({
       host: 'mail.hatteras-island.com',
