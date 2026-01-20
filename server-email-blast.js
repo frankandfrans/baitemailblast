@@ -74,29 +74,6 @@ app.post('/send-blast', upload.fields([
     <a href="https://hatteras-island.com/gear/">GEAR</a>
   </p>
 
-  <!-- SOCIAL ICONS BELOW NAV LINKS -->
- <div style="margin-top:20px;text-align:center;">
-  <a href="https://www.facebook.com/frankandfransavon" target="_blank" style="margin:0 8px;display:inline-block;">
-    <img
-      src="https://baitemailblast.onrender.com/public/facebook.jpg"
-      width="28"
-      height="28"
-      alt="Facebook"
-      style="display:block;border:0;"
-    />
-  </a>
-
-  <a href="https://www.instagram.com/frankandfrans/" target="_blank" style="margin:0 8px;display:inline-block;">
-    <img
-      src="https://baitemailblast.onrender.com/public/instagram.png"
-      width="28"
-      height="28"
-      alt="Instagram"
-      style="display:block;border:0;"
-    />
-  </a>
-</div>
-
 
   <p style="font-size:12px;color:#777;margin-top:20px;">
     You're receiving this because you opted in at Frank & Fran's.<br>
