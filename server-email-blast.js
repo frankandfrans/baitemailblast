@@ -80,7 +80,7 @@ app.post('/send-blast', upload.fields([
  <div style="margin-top:20px;text-align:center;">
   <a href="https://www.facebook.com/frankandfransavon" target="_blank" style="margin:0 8px;display:inline-block;">
     <img
-      src="https://baitemailblast.onrender.com/uploads/facebook.png"
+      src="https://baitemailblast.onrender.com/public/facebook.png"
       width="28"
       height="28"
       alt="Facebook"
@@ -90,7 +90,7 @@ app.post('/send-blast', upload.fields([
 
   <a href="https://www.instagram.com/frankandfrans/" target="_blank" style="margin:0 8px;display:inline-block;">
     <img
-      src="https://baitemailblast.onrender.com/uploads/instagram.png"
+      src="https://baitemailblast.onrender.com/public/instagram.png"
       width="28"
       height="28"
       alt="Instagram"
