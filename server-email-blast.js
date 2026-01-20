@@ -62,9 +62,7 @@ app.post('/send-blast', upload.fields([
 
   <img src="cid:logo" style="max-width:200px;" />
 
-  <h2 style="color:#0078a0;">Fresh Bait Alert!</h2>
-
-  <p>${messageText}</p>
+  <h2 style="color:#0078a0;">${messageText}</h2>
 
   ${productImageHtml}
 
