@@ -96,7 +96,7 @@ app.post('/send-blast', upload.fields([
     await transporter.sendMail({
       from: process.env.MAIL_FROM,
       bcc: emails,
-      subject: "Frank & Fran Fresh Bait Alert!",
+      subject: "Frank & Fran Tica Wasabi Promo",
       html,
       attachments: [{ filename: 'logo.png', path: logoPath, cid: 'logo' }]
     });
