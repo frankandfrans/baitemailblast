@@ -100,7 +100,7 @@ app.post('/send-blast', upload.fields([
 const customSubject = (req.body.customSubject || '').trim();
 
 const subjectLine = useCurrentSubject || !customSubject
-  ? "Frank & Fran's Bait Blast"
+  ? "Frank & Fran's Fresh Bait Alert"
   : customSubject;
 
 await transporter.sendMail({
