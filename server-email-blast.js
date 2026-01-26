@@ -41,6 +41,13 @@ app.post('/send-blast', upload.fields([
     const logoPath = req.files['logo'][0].path;
     const productPath = req.files['product'][0].path;
     const productLink = req.body.productLink || null;
+    const useCurrentSubject = req.body.useCurrentSubject === 'on';
+    const customSubject = (req.body.customSubject || '').trim();
+
+const subjectLine = useCurrentSubject || !customSubject
+  ? "Frank & Fran Tica Wasabi Promo"
+  : customSubject;
+
 
     const productFilename = path.basename(productPath);
     const productImageUrl = `${req.protocol}://${req.get('host')}/uploads/${productFilename}`;
@@ -93,13 +100,21 @@ app.post('/send-blast', upload.fields([
       }
     });
 
-    await transporter.sendMail({
-      from: process.env.MAIL_FROM,
-      bcc: emails,
-      subject: "Frank & Fran's - Valentine's Day is Coming Soon!",
-      html,
-      attachments: [{ filename: 'logo.png', path: logoPath, cid: 'logo' }]
-    });
+   const useCurrentSubject = req.body.useCurrentSubject === 'on';
+const customSubject = (req.body.customSubject || '').trim();
+
+const subjectLine = useCurrentSubject || !customSubject
+  ? "Frank & Fran's Bait Blast"
+  : customSubject;
+
+await transporter.sendMail({
+  from: process.env.MAIL_FROM,
+  bcc: emails,
+  subject: subjectLine,
+  html,
+  attachments: [{ filename: 'logo.png', path: logoPath, cid: 'logo' }]
+});
+
 
     res.send(`Email sent to ${emails.length} recipients`);
   } catch (e) {
