@@ -96,7 +96,7 @@ app.post('/send-blast', upload.fields([
     await transporter.sendMail({
       from: process.env.MAIL_FROM,
       bcc: emails,
-      subject: "Frank & Fran Tica Wasabi Promo",
+      subject: "Frank & Fran's - Valentine's Day is Coming Soon!",
       html,
       attachments: [{ filename: 'logo.png', path: logoPath, cid: 'logo' }]
     });
