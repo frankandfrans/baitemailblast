@@ -41,12 +41,8 @@ app.post('/send-blast', upload.fields([
     const logoPath = req.files['logo'][0].path;
     const productPath = req.files['product'][0].path;
     const productLink = req.body.productLink || null;
-    const useCurrentSubject = req.body.useCurrentSubject === 'on';
-    const customSubject = (req.body.customSubject || '').trim();
 
-const subjectLine = useCurrentSubject || !customSubject
-  ? "Frank & Fran Tica Wasabi Promo"
-  : customSubject;
+
 
 
     const productFilename = path.basename(productPath);
